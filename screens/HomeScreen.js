@@ -13,8 +13,6 @@ import {
 import {
   createStackNavigator
 } from 'react-navigation';
-
-
 const IMAGE_PATH = 'https://image.tmdb.org/t/p/w500';
 
 
@@ -23,10 +21,9 @@ class HomeScreen extends React.Component {
     navigation
   }) => {
     return {
-      headerTitle: 'Home'
+      headerTitle: 'Home',
     };
   };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -35,10 +32,10 @@ class HomeScreen extends React.Component {
       movieId: '',
     };
   }
-
   componentDidMount() {
-    return
-    fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=544ab12ee521cc3d6b5a2b54926cb569&language=en-US&page=1')
+    return fetch(
+        'https://api.themoviedb.org/3/movie/top_rated?api_key=544ab12ee521cc3d6b5a2b54926cb569&language=en-US&page=1'
+      )
       .then(response => response.json())
       .then(responseJson => {
         this.setState({
@@ -50,13 +47,13 @@ class HomeScreen extends React.Component {
         console.error(error);
       });
   }
-  goToDetail = (index) => {
+  goToDetail = index => {
     // this.setState(
     //   {movieId: this.state.dataSource[index].id}
     // )
-    this.props.screenProps.showDetails(this.state.dataSource[index].id)
-    this.props.navigation.navigate("Detail")
-  }
+    this.props.screenProps.showDetails(this.state.dataSource[index].id);
+    this.props.navigation.navigate('Detail');
+  };
   renderItem = ({
     item,
     index
@@ -98,7 +95,6 @@ class HomeScreen extends React.Component {
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -108,12 +104,9 @@ const styles = StyleSheet.create({
   movieImage: {
     width: 200,
     height: 300,
-
   },
   movieList: {
     paddingTop: 20,
-  }
-
+  },
 });
-
 export default HomeScreen;

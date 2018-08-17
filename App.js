@@ -6,7 +6,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ActivityIndicator
 } from "react-native";
 import {
   Constants
@@ -23,12 +22,10 @@ const AppNavigator = createStackNavigator({
 }, {
   initialRouteName: "HomeScreen"
 });
-
 export default class App extends React.Component {
   state = {
     movieId: '',
   }
-
   showDetails = movieId => {
     this.setState({
       movieId
@@ -36,11 +33,11 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.movieId)
     return ( <
       AppNavigator screenProps = {
         {
-          showDetails: this.showDetails
+          showDetails: this.showDetails,
+          getItem: this.state.movieId
         }
       }
       />
