@@ -13,7 +13,11 @@ import {
 import {
   createStackNavigator
 } from 'react-navigation';
+
+
 const IMAGE_PATH = 'https://image.tmdb.org/t/p/w500';
+
+
 class HomeScreen extends React.Component {
   static navigationOptions = ({
     navigation
@@ -22,6 +26,7 @@ class HomeScreen extends React.Component {
       headerTitle: 'Home'
     };
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -30,10 +35,10 @@ class HomeScreen extends React.Component {
       movieId: '',
     };
   }
+
   componentDidMount() {
-    return fetch(
-        'https://api.themoviedb.org/3/movie/top_rated?api_key=544ab12ee521cc3d6b5a2b54926cb569&language=en-US&page=1'
-      )
+    return
+    fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=544ab12ee521cc3d6b5a2b54926cb569&language=en-US&page=1')
       .then(response => response.json())
       .then(responseJson => {
         this.setState({
@@ -59,6 +64,9 @@ class HomeScreen extends React.Component {
     return ( <
       TouchableOpacity onPress = {
         () => this.goToDetail(index)
+      }
+      style = {
+        styles.movieList
       } >
       <
       Image style = {
@@ -70,15 +78,14 @@ class HomeScreen extends React.Component {
         }
       }
       /> <
-      Text > {
-        item.title
-      } < /Text> <
       /TouchableOpacity>
     );
   };
   render() {
     return ( <
-      View >
+      View style = {
+        styles.container
+      } >
       <
       FlatList data = {
         this.state.dataSource
@@ -91,15 +98,22 @@ class HomeScreen extends React.Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // },
-  movieImage: {
-    width: 400,
-    height: 300,
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+  movieImage: {
+    width: 200,
+    height: 300,
+
+  },
+  movieList: {
+    paddingTop: 20,
+  }
+
 });
+
 export default HomeScreen;

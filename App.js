@@ -16,16 +16,19 @@ import DetailScreen from './screens/DetailScreen';
 import {
   createStackNavigator
 } from "react-navigation";
+
 const AppNavigator = createStackNavigator({
   HomeScreen: HomeScreen,
   Detail: DetailScreen
 }, {
   initialRouteName: "HomeScreen"
 });
+
 export default class App extends React.Component {
   state = {
     movieId: '',
   }
+
   showDetails = movieId => {
     this.setState({
       movieId
@@ -33,11 +36,11 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.movieId)
     return ( <
       AppNavigator screenProps = {
         {
-          showDetails: this.showDetails,
-          getItem: this.state.movieId
+          showDetails: this.showDetails
         }
       }
       />

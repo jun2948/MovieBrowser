@@ -10,7 +10,10 @@ import {
 import {
   Constants
 } from 'expo';
+
+
 const IMAGE_PATH = 'https://image.tmdb.org/t/p/w500';
+
 class DetailScreen extends React.Component {
   static navigationOptions = ({
     navigation
@@ -19,6 +22,7 @@ class DetailScreen extends React.Component {
       headerTitle: 'Detail',
     }
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -27,6 +31,7 @@ class DetailScreen extends React.Component {
       movieId: this.props.screenProps.getItem,
     };
   }
+
   componentWillMount() {
     return fetch(
         `https://api.themoviedb.org/3/movie/${this.state.movieId}?api_key=544ab12ee521cc3d6b5a2b54926cb569&language=en-US`
@@ -42,10 +47,14 @@ class DetailScreen extends React.Component {
         console.error(error);
       });
   }
+
+
   render() {
     console.log(`movieid :${this.state.movieId}`)
     return ( <
-      View >
+      View style = {
+        styles.container
+      } >
       <
       Image style = {
         styles.movieImage
@@ -56,18 +65,37 @@ class DetailScreen extends React.Component {
         }
       }
       /> <
-      Text > {
+      Text style = {
+        styles.movieTitle
+      } > {
+        this.state.dataSource.title
+      } < /Text> <
+      Text style = {
+        styles.movieOverview
+      } > {
         this.state.dataSource.overview
       } < /Text> <
       /View>
     )
   }
 }
-const styles = StyleSheet.create({
 
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   movieImage: {
-    width: 400,
+    width: 200,
     height: 300,
   },
+  movieTitle: {
+    fontSize: 20
+  },
+  movieOverview: {
+    paddingTop: 20
+  },
 });
+
 export default DetailScreen
